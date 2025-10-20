@@ -1,4 +1,4 @@
-import './App.css';
+import './App.css'
 import { Camera } from 'lucide-react'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
         <h1 className="text-2xl font-bold">Hello world!</h1>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
