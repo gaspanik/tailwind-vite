@@ -8,7 +8,7 @@
   - プラグイン: @vitejs/plugin-react 5（Fast Refresh など）
 - Tailwind CSS 4
   - ビルド統合: @tailwindcss/vite 4
-- Biome 2.2（フォーマッター + Linter）
+- Biome 2.3（フォーマッター + Linter）
 - アイコン: lucide-react
 - パッケージマネージャー: pnpm（ワークスペース設定あり）
 
