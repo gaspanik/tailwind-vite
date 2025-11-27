@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "biome lint src --write",
-    "format": "biome format src --write",
-    "check": "biome check src --write",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "biome lint --write",
+    "format": "biome format -write",
+    "check": "biome check --write"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
