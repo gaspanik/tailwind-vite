@@ -1,78 +1,78 @@
 # Copilot Instructions
 
-## プロジェクト概要
+## Project Overview
 
-React 19 + TypeScript + Vite 7 + Tailwind CSS 4 の最小構成スターター。pnpm ワークスペース対応。
+Minimal React 19 + TypeScript + Vite 7 + Tailwind CSS 4 starter with pnpm workspace support.
 
-## 技術スタック
+## Tech Stack
 
-- **フレームワーク**: React 19.2（`react-jsx` transform）
-- **ビルド**: Vite 7 + `@vitejs/plugin-react`（Fast Refresh 有効）
-- **スタイル**: Tailwind CSS 4（`@tailwindcss/vite` 経由、`@import "tailwindcss"` で適用）
-- **Linter/Formatter**: Biome 2.3（`.biome.json` で厳格設定）
-- **パッケージマネージャー**: pnpm（`pnpm-workspace.yaml` で `@tailwindcss/oxide`, `esbuild` のみビルド依存）
+- **Framework**: React 19.2 (`react-jsx` transform)
+- **Build**: Vite 7 + `@vitejs/plugin-react` (Fast Refresh enabled)
+- **Styling**: Tailwind CSS 4 (via `@tailwindcss/vite`, applied with `@import "tailwindcss"`)
+- **Linter/Formatter**: Biome 2.3 (strict configuration in `.biome.json`)
+- **Package Manager**: pnpm (`pnpm-workspace.yaml` with `@tailwindcss/oxide`, `esbuild` as build dependencies only)
 
-## 重要な構造
+## Key Structure
 
-- **エントリ**: `index.html` → `src/main.tsx` → `src/App.tsx`
-- **スタイル**: `src/index.css` で `@import "tailwindcss"` のみ（設定ファイルなし、v4 の新方式）
-- **TypeScript**: プロジェクト参照（`tsconfig.json` は `tsconfig.app.json` と `tsconfig.node.json` を参照）
-- **Vite 設定**: `vite.config.ts` で `base: './'`（相対パス配信）
+- **Entry**: `index.html` → `src/main.tsx` → `src/App.tsx`
+- **Styles**: `src/index.css` with `@import "tailwindcss"` only (no config file, v4 approach)
+- **TypeScript**: Project references (`tsconfig.json` references `tsconfig.app.json` and `tsconfig.node.json`)
+- **Vite Config**: `vite.config.ts` with `base: './'` (relative path deployment)
 
-## コーディング規約
+## Coding Conventions
 
 ### TypeScript
 
-- **厳格モード**: `strict: true`、未使用変数/引数エラー、`noUncheckedSideEffectImports` 有効
-- **モジュール**: `moduleResolution: "bundler"`、`allowImportingTsExtensions: true`
-- **JSX**: `react-jsx` transform（`import React` 不要）
-- **型チェック**: `erasableSyntaxOnly: true`（型情報のみの構文に限定）
+- **Strict Mode**: `strict: true`, unused variables/parameters error, `noUncheckedSideEffectImports` enabled
+- **Module**: `moduleResolution: "bundler"`, `allowImportingTsExtensions: true`
+- **JSX**: `react-jsx` transform (no `import React` needed)
+- **Type Checking**: `erasableSyntaxOnly: true` (limited to type-only syntax)
 
-### Biome ルール
+### Biome Rules
 
-- **フォーマット**: 2 スペース、LF、80 文字幅、セミコロン `asNeeded`、シングルクォート、トレイリングコンマ `all`
-- **Linter**: `recommended` ベース + TypeScript 厳格ルール（`noExplicitAny: error`、`noUnusedVariables: error`）
-- **React**: `useExhaustiveDependencies: warn`、`useHookAtTopLevel: error`
-- **CSS**: Tailwind ディレクティブのパース有効
+- **Format**: 2 spaces, LF, 80 char width, semicolons `asNeeded`, single quotes, trailing commas `all`
+- **Linter**: `recommended` base + strict TypeScript rules (`noExplicitAny: error`, `noUnusedVariables: error`)
+- **React**: `useExhaustiveDependencies: warn`, `useHookAtTopLevel: error`
+- **CSS**: Tailwind directives parsing enabled
 
-## 開発ワークフロー
+## Development Workflow
 
 ```fish
-# 開発サーバー起動（HMR 有効）
+# Start dev server (HMR enabled)
 pnpm dev
 
-# ビルド（型チェック → Vite ビルド）
+# Build (type check → Vite build)
 pnpm build
 
-# ビルド成果物のプレビュー
+# Preview build artifacts
 pnpm preview
 
-# コード品質チェック（Biome のフォーマット + lint）
+# Code quality check (Biome format + lint)
 pnpm check
 ```
 
-### Mise タスク（推奨）
+### Mise Tasks (Recommended)
 
-`mise.toml` で定義されたタスクを `mise run <task>` で実行可能：
+Tasks defined in `mise.toml` can be run with `mise run <task>`:
 
 - `vite:dev` / `vite:build` / `vite:preview`
-- `biome:format` / `biome:lint` / `biome:check`（確認プロンプトあり）
+- `biome:format` / `biome:lint` / `biome:check` (with confirmation prompts)
 
-## 依存関係管理
+## Dependency Management
 
-- **ロックファイル**: `pnpm-lock.yaml`（pnpm v9+ の新形式）
-- **更新**: `ncu -i -u` でインタラクティブ更新（履歴より）
+- **Lock File**: `pnpm-lock.yaml` (pnpm v9+ format)
+- **Updates**: `ncu -i -u` for interactive updates (from history)
 
-## Tailwind CSS v4 の注意点
+## Tailwind CSS v4 Notes
 
-- **設定不要**: `tailwind.config.js` なし、`src/index.css` に `@import "tailwindcss"` で完結
-- **カスタマイズ**: CSS 変数や `@theme` ディレクティブで設定（従来の JS 設定ではない）
-- **Vite プラグイン**: `@tailwindcss/vite` が必須（PostCSS 不要）
+- **No Config Needed**: No `tailwind.config.js`, just `@import "tailwindcss"` in `src/index.css`
+- **Customization**: Use CSS variables or `@theme` directives (not traditional JS config)
+- **Vite Plugin**: `@tailwindcss/vite` required (no PostCSS needed)
 
-## コンポーネント作成時のパターン
+## Component Patterns
 
 ```tsx
-// lucide-react アイコン使用例（src/App.tsx 参照）
+// lucide-react icon usage example (see src/App.tsx)
 import { IconName } from 'lucide-react'
 
 function Component() {
@@ -85,11 +85,11 @@ function Component() {
 }
 ```
 
-- **CSS クラス**: Tailwind ユーティリティ優先
-- **型安全**: `App.css` などのローカル CSS も併用可（`import './App.css'`）
+- **CSS Classes**: Tailwind utilities preferred
+- **Type Safety**: Local CSS like `App.css` can be used alongside (`import './App.css'`)
 
-## トラブルシューティング
+## Troubleshooting
 
-- **Biome LSP エラー**: VSCode を再読み込み（`Developer: Reload Window`）、ワークスペース信頼確認
-- **HMR 停止**: `pnpm dev` 再起動、`node_modules/.vite` キャッシュ削除
-- **型エラー**: `pnpm build` で事前チェック（`tsc -b` → `vite build`）
+- **Biome LSP Errors**: Reload VSCode (`Developer: Reload Window`), verify workspace trust
+- **HMR Stopped**: Restart `pnpm dev`, delete `node_modules/.vite` cache
+- **Type Errors**: Pre-check with `pnpm build` (`tsc -b` → `vite build`)
