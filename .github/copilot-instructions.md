@@ -69,6 +69,28 @@ Tasks defined in `mise.toml` can be run with `mise run <task>`:
 - **Customization**: Use CSS variables or `@theme` directives (not traditional JS config)
 - **Vite Plugin**: `@tailwindcss/vite` required (no PostCSS needed)
 
+### V4 Class Name Changes (CRITICAL)
+
+Tailwind CSS v4 has updated class naming conventions. **Always use v4 syntax**:
+
+```tsx
+// ❌ WRONG (v3 syntax)
+<div className="text-gray-500 bg-gray-50 space-y-4">
+
+// ✅ CORRECT (v4 syntax)
+<div className="text-gray-500 bg-gray-50 flex flex-col gap-4">
+```
+
+**Key v4 changes:**
+- ❌ `space-x-*` / `space-y-*` → ✅ Use `gap-*` with flex/grid
+- ❌ `divide-*` → ✅ Use borders on individual children
+- ✅ All utility classes remain: `flex`, `grid`, `p-*`, `m-*`, `w-*`, `h-*`, etc.
+- ✅ Arbitrary values: Use sparingly (`w-[42px]`). Prefer standard scale (`w-2.5`) or CSS variables (`text-primary`)
+- ✅ Responsive: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
+- ✅ State variants: `hover:`, `focus:`, `active:`, `disabled:`, etc.
+
+**Never generate or suggest v3-specific utilities.** When refactoring, convert deprecated utilities to modern flex/grid patterns.
+
 ## Component Patterns
 
 ```tsx
